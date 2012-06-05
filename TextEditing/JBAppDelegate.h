@@ -11,5 +11,6 @@
 @interface JBAppDelegate : NSObject <NSApplicationDelegate>
 
 @property (assign) IBOutlet NSWindow *window;
+@property (strong) IBOutlet NSTextView *textView;
 
 @end

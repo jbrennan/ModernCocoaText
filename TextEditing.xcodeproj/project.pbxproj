@@ -13,6 +13,7 @@
 		CD7D5D47157CFE92007CE873 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = CD7D5D45157CFE92007CE873 /* Credits.rtf */; };
 		CD7D5D4A157CFE92007CE873 /* JBAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7D5D49157CFE92007CE873 /* JBAppDelegate.m */; };
 		CD7D5D4D157CFE92007CE873 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD7D5D4B157CFE92007CE873 /* MainMenu.xib */; };
+		CD7D5D55157D00DD007CE873 /* JBTextEditorProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7D5D54157D00DD007CE873 /* JBTextEditorProcessor.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,14 +22,16 @@
 		CD7D5D39157CFE92007CE873 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		CD7D5D3A157CFE92007CE873 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		CD7D5D3B157CFE92007CE873 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		CD7D5D3E157CFE92007CE873 /* TextEditing-Info.plist */ = {isa = PBXFileReference; path = "TextEditing-Info.plist"; sourceTree = "<group>"; };
+		CD7D5D3E157CFE92007CE873 /* TextEditing-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TextEditing-Info.plist"; sourceTree = "<group>"; };
 		CD7D5D40157CFE92007CE873 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		CD7D5D42157CFE92007CE873 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		CD7D5D44157CFE92007CE873 /* TextEditing-Prefix.pch */ = {isa = PBXFileReference; path = "TextEditing-Prefix.pch"; sourceTree = "<group>"; };
+		CD7D5D44157CFE92007CE873 /* TextEditing-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TextEditing-Prefix.pch"; sourceTree = "<group>"; };
 		CD7D5D46157CFE92007CE873 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
-		CD7D5D48157CFE92007CE873 /* JBAppDelegate.h */ = {isa = PBXFileReference; path = JBAppDelegate.h; sourceTree = "<group>"; };
+		CD7D5D48157CFE92007CE873 /* JBAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JBAppDelegate.h; sourceTree = "<group>"; };
 		CD7D5D49157CFE92007CE873 /* JBAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JBAppDelegate.m; sourceTree = "<group>"; };
 		CD7D5D4C157CFE92007CE873 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		CD7D5D53157D00DD007CE873 /* JBTextEditorProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JBTextEditorProcessor.h; sourceTree = "<group>"; };
+		CD7D5D54157D00DD007CE873 /* JBTextEditorProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBTextEditorProcessor.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +87,8 @@
 			children = (
 				CD7D5D48157CFE92007CE873 /* JBAppDelegate.h */,
 				CD7D5D49157CFE92007CE873 /* JBAppDelegate.m */,
+				CD7D5D53157D00DD007CE873 /* JBTextEditorProcessor.h */,
+				CD7D5D54157D00DD007CE873 /* JBTextEditorProcessor.m */,
 				CD7D5D4B157CFE92007CE873 /* MainMenu.xib */,
 				CD7D5D3D157CFE92007CE873 /* Supporting Files */,
 			);
@@ -169,6 +174,7 @@
 			files = (
 				CD7D5D43157CFE92007CE873 /* main.m in Sources */,
 				CD7D5D4A157CFE92007CE873 /* JBAppDelegate.m in Sources */,
+				CD7D5D55157D00DD007CE873 /* JBTextEditorProcessor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
