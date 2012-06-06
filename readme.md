@@ -15,3 +15,10 @@ When any kind of parenthesis style character is inserted (that is, `(`, `[`, and
 3. If the closing brace is deleted, this behaves like it normally would without the assist (that is, the closing character is the only thing deleted).
 
 4. Pasting does not invoke any of these behaviour.
+
+##Block Editing
+
+When a block of text is selected and the user types a character, the block of text is typically replaced by whatever has just been typed or pasted in. This is not always what the user has intended. Instead, in some circumstances the selected text should instead be surrounded by the characters and have the selection extended. Examples:
+
+    text	# this is our selected text when the ( key is pressed.
+    (text)	# this is the result

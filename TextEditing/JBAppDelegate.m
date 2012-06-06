@@ -90,12 +90,15 @@
 //		[textView setSelectedRange:NSMakeRange(affectedCharRange.location, 0)];
 //	}
 	
-	NSString *proposedNewString = [textView string];
-	proposedNewString = [proposedNewString stringByReplacingCharactersInRange:affectedCharRange withString:replacementString];
-	
+	NSString *originalString = [textView string];
+	//proposedNewString = [proposedNewString stringByReplacingCharactersInRange:affectedCharRange withString:replacementString];
+	NSString *deletedString = @"";
+	if (affectedCharRange.length > 0) {
+		deletedString = [originalString substringWithRange:affectedCharRange];
+	}
 	
 	JBTextEditorProcessor *processor = [JBTextEditorProcessor new];
-	[processor processStringAsynchronously:proposedNewString changedSelectionRange:affectedCharRange replacementString:replacementString completionHandler:^(NSString *processedText, NSRange newSelectedRange) {
+	[processor processStringAsynchronously:originalString changedSelectionRange:affectedCharRange deletedString:deletedString insertedString:replacementString completionHandler:^(NSString *processedText, NSRange newSelectedRange) {
 		[textView setString:processedText];
 		
 		
