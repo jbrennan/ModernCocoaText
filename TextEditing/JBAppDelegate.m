@@ -85,10 +85,10 @@
 
 - (BOOL)textView:(NSTextView *)textView shouldChangeTextInRange:(NSRange)affectedCharRange replacementString:(NSString *)replacementString {
 	
-//	if ([replacementString isEqualToString:@"("]) {
-//		[[[textView textStorage] mutableString] appendString:@")"];
-//		[textView setSelectedRange:NSMakeRange(affectedCharRange.location, 0)];
-//	}
+	
+	if (nil == replacementString) // This means only the strings attributes were changing, so we don't really care about replacements.
+		return YES;
+	
 	
 	NSString *originalString = [textView string];
 	//proposedNewString = [proposedNewString stringByReplacingCharactersInRange:affectedCharRange withString:replacementString];
@@ -106,7 +106,7 @@
 	}];
 	
 	NSLog(@"%@ : %@", NSStringFromRange(affectedCharRange), replacementString);
-	return YES;
+	return NO;
 }
 
 

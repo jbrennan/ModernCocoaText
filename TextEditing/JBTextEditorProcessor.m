@@ -12,8 +12,9 @@
 
 
 - (void)processStringAsynchronously:(NSString *)originalString changedSelectionRange:(NSRange)selectionRange deletedString:(NSString *)deletedString insertedString:(NSString *)insertedString completionHandler:(JBTextEditorProcessorCompletionHandler)completionHandler {
+	NSString *originalCopy = [originalString copy];
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^() {
-		NSString *originalCopy = [originalString copy];
+		
 		NSString *processedString = [originalCopy stringByReplacingCharactersInRange:selectionRange withString:insertedString];
 		NSRange newSelectionRange = selectionRange;
 		
