@@ -16,6 +16,8 @@ When any kind of parenthesis style character is inserted (that is, `(`, `[`, and
 
 4. Pasting does not invoke any of these behaviour.
 
+5. If the cursor is placed in front of a closing brace and that closing brace is typed, the cursor should just move to the other side of the brace and have it remain in place. That is, don't insert another character, just move the cursor along. If the user really wanted to have two of the same characters, they'll just type it again.
+
 ##Block Editing
 
 When a block of text is selected and the user types a character, the block of text is typically replaced by whatever has just been typed or pasted in. This is not always what the user has intended. Instead, in some circumstances the selected text should instead be surrounded by the characters and have the selection extended. Examples:
