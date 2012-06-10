@@ -20,21 +20,12 @@
 		
 		
 		if (![insertedString length]) {
-			// it's a deletion
+			
 			newSelectionRange.length = 0;
-			//NSLog(@"deleted = %@", deletedString);
 			
 			NSString *pair = nil;
-			
-			
-			NSUInteger len = [originalCopy length];
-			NSUInteger selection = NSMaxRange(selectionRange);
-			if (len == selection) {
-				NSLog(@"max range");
-			} else {
-				NSLog(@"not");
+			if ([originalCopy length] != NSMaxRange(selectionRange)) {
 				pair = [originalCopy substringWithRange:NSMakeRange(selectionRange.location, 2)];
-				NSLog(@"pair = %@", pair);
 			}
 			
 			if ([pair length]) {
@@ -58,6 +49,7 @@
 			newSelectionRange.location += 1;
 			
 			
+			// Check for the opening of a pair
 			if ([insertedString isEqualToString:@"("]) {
 				processedString = [processedString stringByReplacingCharactersInRange:newSelectionRange withString:@")"];
 			} else if ([insertedString isEqualToString:@"{"]) {
@@ -67,6 +59,39 @@
 			} else if ([insertedString isEqualToString:@"“"]) {
 				processedString = [processedString stringByReplacingCharactersInRange:newSelectionRange withString:@"”"];
 			}
+			
+			
+			// check for the closing of a pair
+//			NSString *nextCharacter = nil;
+//			if ([originalCopy length] > NSMaxRange(selectionRange)) {
+//				// safe to look ahead
+//				nextCharacter = [originalCopy substringWithRange:NSMakeRange(selectionRange.location, 1)];
+//			}
+//			NSLog(@"next char: %@", nextCharacter);
+//			if ([nextCharacter isEqualToString:insertedString]) {
+//				if ([nextCharacter isEqualToString:@")"] ||
+//					[nextCharacter isEqualToString:@"}"] ||
+//					[nextCharacter isEqualToString:@"]"] ||
+//					[nextCharacter isEqualToString:@"”"]) {
+//					processedString = [originalCopy stringByReplacingCharactersInRange:NSMakeRange(selectionRange.location, 1) withString:@""];
+//				}
+//			}
+			
+			NSString *pair = nil;
+			if ([originalCopy length] > NSMaxRange(selectionRange)) {
+				pair = [processedString substringWithRange:NSMakeRange(selectionRange.location, 2)];
+			}
+			
+			if ([pair length]) {
+				if ([pair isEqualToString:@"))"] ||
+					[pair isEqualToString:@"]]"] ||
+					[pair isEqualToString:@"}}"] ||
+					[pair isEqualToString:@"””"]) {
+					
+					processedString = originalCopy;
+				}
+			}
+			
 		}
 		
 		
