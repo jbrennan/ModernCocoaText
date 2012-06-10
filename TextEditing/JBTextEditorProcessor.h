@@ -12,6 +12,5 @@ typedef void(^JBTextEditorProcessorCompletionHandler)(NSString *processedText, N
 
 @interface JBTextEditorProcessor : NSObject
 
-- (void)processStringAsynchronously:(NSString *)originalString changedSelectionRange:(NSRange)selectionRange deletedString:(NSString *)deletedString insertedString:(NSString *)insertedString completionHandler:(JBTextEditorProcessorCompletionHandler)completionHandler; // completionHandler is executed on the main queue.
-//- (void)processStringAsynchronously:(NSString *)fullString 
+- (void)processString:(NSString *)originalString changedSelectionRange:(NSRange)selectionRange deletedString:(NSString *)deletedString insertedString:(NSString *)insertedString completionHandler:(JBTextEditorProcessorCompletionHandler)completionHandler; // completionHandler is executed on the main queue.
 @end

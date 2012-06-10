@@ -98,14 +98,14 @@
 	}
 	
 	JBTextEditorProcessor *processor = [JBTextEditorProcessor new];
-	[processor processStringAsynchronously:originalString changedSelectionRange:affectedCharRange deletedString:deletedString insertedString:replacementString completionHandler:^(NSString *processedText, NSRange newSelectedRange) {
+	[processor processString:originalString changedSelectionRange:affectedCharRange deletedString:deletedString insertedString:replacementString completionHandler:^(NSString *processedText, NSRange newSelectedRange) {
 		[textView setString:processedText];
 		
 		
 		[textView setSelectedRange:newSelectedRange];
 	}];
 	
-	NSLog(@"%@ : %@", NSStringFromRange(affectedCharRange), replacementString);
+	//NSLog(@"%@ : %@", NSStringFromRange(affectedCharRange), replacementString);
 	return NO;
 }
 
