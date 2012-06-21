@@ -26,23 +26,41 @@
 - (void)awakeFromNib {
 	[super awakeFromNib];
 	
+	
 	[[self textView] setDelegate:self];
 	[[self.textView textStorage] setDelegate:self];
-	[self.textView setFont:[NSFont fontWithName:@"Menlo" size:12.0f]];
+	[self.textView setFont:[NSFont fontWithName:@"Menlo" size:48.0f]];
 }
 
 
-//- (void)textStorageWillProcessEditing:(NSNotification *)notification {
-//	NSTextStorage *textStorage = [notification object];
-//	
-//	NSString *string = [textStorage string];
-//	JBTextEditorProcessor *processor = [JBTextEditorProcessor new];
-//	[processor processStringAsynchronously:string withCompletionHandler:^(NSString *processedText) {
-//		
-//		[textStorage appendAttributedString:[[NSAttributedString alloc] initWithString:@"]"]];
-//		
-//	}];
-//}
+- (BOOL)textView:(NSTextView *)textView shouldChangeTextInRange:(NSRange)affectedCharRange replacementString:(NSString *)replacementString {
+	
+	
+	if (nil == replacementString) // This means only the strings attributes were changing, so we don't really care about replacements.
+		return YES;
+	
+	
+	NSString *originalString = [textView string];
+	
+	NSString *deletedString = @"";
+	if (affectedCharRange.length > 0) {
+		deletedString = [originalString substringWithRange:affectedCharRange];
+	}
+	
+	JBTextEditorProcessor *processor = [JBTextEditorProcessor new];
+	[processor processString:originalString changedSelectionRange:affectedCharRange deletedString:deletedString insertedString:replacementString completionHandler:^(NSString *processedText, NSRange newSelectedRange) {
+		[textView setString:processedText];
+		
+		
+		[textView setSelectedRange:newSelectedRange];
+	}];
+	
+	
+	return NO;
+}
+
+
+
 
 
 - (void)textStorageDidProcessEditing:(NSNotification *)notification {
@@ -71,43 +89,52 @@
 }
 
 
-- (void)textDidChange:(NSNotification *)notification {
-	JBTextEditorProcessor *processor = [JBTextEditorProcessor new];
-	NSTextStorage *storage = [self.textView textStorage];
-	
-	//NSLog(@"%@", NSStringFromRange([storage editedRange]));
-	
-//	[processor processStringAsynchronously:self.textView.string withCompletionHandler:^(NSString *processedText, NSRange newSelectedRange) {
-//		[self.textView setString:processedText];
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//- (void)textDidChange:(NSNotification *)notification {
+//	JBTextEditorProcessor *processor = [JBTextEditorProcessor new];
+//	NSTextStorage *storage = [self.textView textStorage];
+//	
+//	//NSLog(@"%@", NSStringFromRange([storage editedRange]));
+//	
+////	[processor processStringAsynchronously:self.textView.string withCompletionHandler:^(NSString *processedText, NSRange newSelectedRange) {
+////		[self.textView setString:processedText];
+////	}];
+//}
+
+
+//- (void)textStorageWillProcessEditing:(NSNotification *)notification {
+//	NSTextStorage *textStorage = [notification object];
+//	
+//	NSString *string = [textStorage string];
+//	JBTextEditorProcessor *processor = [JBTextEditorProcessor new];
+//	[processor processStringAsynchronously:string withCompletionHandler:^(NSString *processedText) {
+//		
+//		[textStorage appendAttributedString:[[NSAttributedString alloc] initWithString:@"]"]];
+//		
 //	}];
-}
+//}
 
 
-- (BOOL)textView:(NSTextView *)textView shouldChangeTextInRange:(NSRange)affectedCharRange replacementString:(NSString *)replacementString {
-	
-	
-	if (nil == replacementString) // This means only the strings attributes were changing, so we don't really care about replacements.
-		return YES;
-	
-	
-	NSString *originalString = [textView string];
-	//proposedNewString = [proposedNewString stringByReplacingCharactersInRange:affectedCharRange withString:replacementString];
-	NSString *deletedString = @"";
-	if (affectedCharRange.length > 0) {
-		deletedString = [originalString substringWithRange:affectedCharRange];
-	}
-	
-	JBTextEditorProcessor *processor = [JBTextEditorProcessor new];
-	[processor processString:originalString changedSelectionRange:affectedCharRange deletedString:deletedString insertedString:replacementString completionHandler:^(NSString *processedText, NSRange newSelectedRange) {
-		[textView setString:processedText];
-		
-		
-		[textView setSelectedRange:newSelectedRange];
-	}];
-	
-	//NSLog(@"%@ : %@", NSStringFromRange(affectedCharRange), replacementString);
-	return NO;
-}
+
 
 
 

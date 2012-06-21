@@ -41,29 +41,48 @@
 		}
 		
 		
+	} else if ([deletedString length] && [insertedString length]) {
+		// There was a block of text selected, now new text is trying to inserted over it..
+		
+		// If the inserted text is an opening pair, enclose the selection with opening+closing pair
+		// else, the processedString prepared above is sufficient; just move the selection range.
+		
+		
+		newSelectionRange.length += 2;
+		if ([insertedString isEqualToString:@"("]) {
+			
+			NSString *enclosed = [self stringByEnclosingString:deletedString withOpeningString:@"(" closingString:@")"];
+			processedString = [originalCopy stringByReplacingCharactersInRange:selectionRange withString:enclosed];
+			
+		} else if ([insertedString isEqualToString:@"{"]) {
+			
+			NSString *enclosed = [self stringByEnclosingString:deletedString withOpeningString:@"{" closingString:@"}"];
+			processedString = [originalCopy stringByReplacingCharactersInRange:selectionRange withString:enclosed];
+			
+		} else if ([insertedString isEqualToString:@"["]) {
+			
+			NSString *enclosed = [self stringByEnclosingString:deletedString withOpeningString:@"[" closingString:@"]"];
+			processedString = [originalCopy stringByReplacingCharactersInRange:selectionRange withString:enclosed];
+			
+		} else if ([self isDoubleQuoteCharacter:insertedString]) {
+			
+			NSString *enclosed = [self stringByEnclosingString:deletedString withOpeningString:@"“" closingString:@"”"];
+			processedString = [originalCopy stringByReplacingCharactersInRange:selectionRange withString:enclosed];
+			
+		} else {
+			newSelectionRange.length = 0;
+			newSelectionRange.location = selectionRange.location + 1;
+		}
+		
 		
 		
 	} else {
-		// insertion
+		// insertion...prepare the new selection ranges
 		newSelectionRange.length = 0;
 		newSelectionRange.location += 1;
 		
 		
-		// Check for the opening of a pair
-		if ([insertedString isEqualToString:@"("]) {
-			processedString = [processedString stringByReplacingCharactersInRange:newSelectionRange withString:@")"];
-		} else if ([insertedString isEqualToString:@"{"]) {
-			processedString = [processedString stringByReplacingCharactersInRange:newSelectionRange withString:@"}"];
-		} else if ([insertedString isEqualToString:@"["]) {
-			processedString = [processedString stringByReplacingCharactersInRange:newSelectionRange withString:@"]"];
-		} else if ([insertedString isEqualToString:@"“"]) {
-			processedString = [processedString stringByReplacingCharactersInRange:newSelectionRange withString:@"”"];
-		}
-		
-		
 		// check for the closing of a pair
-		
-		
 		NSString *pair = nil;
 		if ([originalCopy length] > NSMaxRange(selectionRange)) {
 			pair = [processedString substringWithRange:NSMakeRange(selectionRange.location, 2)];
@@ -79,12 +98,36 @@
 			}
 		}
 		
+		
+		// Check for the opening of a pair
+		if ([insertedString isEqualToString:@"("]) {
+			processedString = [processedString stringByReplacingCharactersInRange:newSelectionRange withString:@")"];
+		} else if ([insertedString isEqualToString:@"{"]) {
+			processedString = [processedString stringByReplacingCharactersInRange:newSelectionRange withString:@"}"];
+		} else if ([insertedString isEqualToString:@"["]) {
+			processedString = [processedString stringByReplacingCharactersInRange:newSelectionRange withString:@"]"];
+		} else if ([insertedString isEqualToString:@"“"]) {
+			processedString = [processedString stringByReplacingCharactersInRange:newSelectionRange withString:@"”"];
+		}
+		
 	}
 	
 	
 	// Main Queue code
 	completionHandler(processedString, newSelectionRange);
 
+}
+
+
+- (NSString *)stringByEnclosingString:(NSString *)string withOpeningString:(NSString *)openingString closingString:(NSString *)closingString {
+	return [NSString stringWithFormat:@"%@%@%@", openingString, string, closingString];
+}
+
+
+// returns YES even for closing curly quote
+// using this for selection wrapping...if the user selected text and hit any of these characters, they probably want to wrap the text in curly quotes
+- (BOOL)isDoubleQuoteCharacter:(NSString *)string {
+	return [string isEqualToString:@"\""] || [string isEqualToString:@"“"] || [string isEqualToString:@"”"];
 }
 
 
