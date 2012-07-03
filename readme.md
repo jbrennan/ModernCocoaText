@@ -24,3 +24,13 @@ When a block of text is selected and the user types a character, the block of te
 
     text	# this is our selected text when the ( key is pressed.
     (text)	# this is the result
+    
+
+##Subtler rules
+
+Inserting a pair should be a little smarter about how it works. If the cursor is in whitespace or end of a line then it should insert the pair. Otherwise, it has to be a little smarter:
+
+1. If the next character is a non-pair character, insert *only* the opening character
+2. If the existing characters around the insertion point are a pair, insert a new pair. (ex: insertion point in between `()`, then insert a new pair -> `(())`).
+3. If the next character is **any other** closing pair character, insert the pair.
+4. Else, insert the opening character only.
