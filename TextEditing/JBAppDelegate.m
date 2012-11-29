@@ -29,10 +29,11 @@
 	
 	[[self textView] setDelegate:self];
 	[[self.textView textStorage] setDelegate:self];
-	[self.textView setFont:[NSFont fontWithName:@"Menlo" size:48.0f]];
+	[self.textView setFont:[NSFont fontWithName:@"Menlo" size:24.0f]];
 }
 
 
+// If using the text processor this way, note IT BREAKS UNDO because it returns NO, so the undo system thinks the text hasn't changed.
 - (BOOL)textView:(NSTextView *)textView shouldChangeTextInRange:(NSRange)affectedCharRange replacementString:(NSString *)replacementString {
 	
 	

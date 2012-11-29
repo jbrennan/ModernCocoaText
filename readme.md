@@ -1,6 +1,46 @@
+#Modern Text
+
+This repo includes some helper classes for making smarter text systems, specifically helping the user type certain commonly paired characters. The code tries to be as smart as possible by inserting only when it's really desired, and making it possible for the user to correct any undesired behaviour.
+
+##Installation
+
+These instructions work equally well for iOS or OS X, with any of the text classes. The examples given will be for `NSTextView` but if you use your brain you should be able to figure out how to translate to iOS quite easily too.
+
+###The quick and dirty way
+
+The quickest way to use this class is to implement the following delegate method for `NSTextView`. **Warning** this breaks undo support if you use this method. There's probably a way around that but I haven't looked into it enough. This method also works just as well with `NSTextField` if you use its appropriate delegate method.
+
+	- (BOOL)textView:(NSTextView *)textView shouldChangeTextInRange:(NSRange)affectedCharRange replacementString:(NSString *)replacementString {
+	
+	
+		if (nil == replacementString) // This means only the strings attributes were changing, so we don't really care about replacements.
+			return YES;
+	
+	
+		NSString *originalString = [textView string];
+	
+		NSString *deletedString = @"";
+		if (affectedCharRange.length > 0) {
+			deletedString = [originalString substringWithRange:affectedCharRange];
+		}
+		
+		// Or, create an instance property for `processor`. Shown here for simplicity.
+		JBTextEditorProcessor *processor = [JBTextEditorProcessor new];
+		[processor processString:originalString changedSelectionRange:affectedCharRange deletedString:deletedString insertedString:replacementString completionHandler:^(NSString *processedText, NSRange newSelectedRange) {
+			[textView setString:processedText];
+			[textView setSelectedRange:newSelectedRange];
+		}];
+	
+		return NO;
+	}
+
+###The Better, cleaner way
+
+The alternative is of course to use an `NSTextView` subclass and manipulate the text storage directly. This maintains the undo stack.
+
 ##Automatic Parenthesis Insertion and Matching
 
-When any kind of parenthesis style character is inserted (that is, `(`, `[`, and `{` (and optionally `<`)) should have their closing counterparts inserted automatically, with the cursor placed between them. This is to assist the user in typing, and as such some special considerations have to be followed.
+When any kind of parenthesis style character is inserted (that is, `(`, `[`, and `{` (and optionally `<`)), they should have their closing counterparts inserted automatically, with the cursor placed between them. This is to assist the user in typing, and as such some special considerations have to be followed.
 
 1. Inserting an opening brace automatically inserts its counterpart. This happens if and only if the character after the opening brace is either whitespace or nonexistant (i.e., end of line or end of file). Examples
 
