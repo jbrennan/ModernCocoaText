@@ -13,8 +13,8 @@
 
 - (void)processString:(NSString *)originalString changedSelectionRange:(NSRange)selectionRange deletedString:(NSString *)deletedString insertedString:(NSString *)insertedString completionHandler:(JBTextEditorProcessorCompletionHandler)completionHandler {
 	NSString *originalCopy = [originalString copy];
-
-		
+	
+	
 	NSString *processedString = [originalCopy stringByReplacingCharactersInRange:selectionRange withString:insertedString];
 	NSRange newSelectionRange = selectionRange;
 	
@@ -84,8 +84,10 @@
 		
 		// check for the closing of a pair
 		NSString *pair = nil;
+		NSString *originalPair = nil;
 		if ([originalCopy length] > NSMaxRange(selectionRange)) {
 			pair = [processedString substringWithRange:NSMakeRange(selectionRange.location, 2)];
+			originalPair = [originalCopy substringWithRange:NSMakeRange(selectionRange.location - 1, 2)];
 		}
 		
 		if ([pair length]) {
@@ -95,6 +97,16 @@
 				[pair isEqualToString:@"””"]) {
 				
 				processedString = originalCopy;
+			}
+		}
+		
+		if ([originalPair length]) {
+			NSString *suffix = [originalPair substringFromIndex:1];
+			
+			// If the cursor is in whitespace or end of a line then it should insert the pair.
+			NSRange foundRange = [suffix rangeOfString:@"\\s" options:NSRegularExpressionSearch];
+			if (foundRange.location != NSNotFound) {
+				NSLog(@"whitespace");
 			}
 		}
 		
@@ -115,7 +127,7 @@
 	
 	// Main Queue code
 	completionHandler(processedString, newSelectionRange);
-
+	
 }
 
 
