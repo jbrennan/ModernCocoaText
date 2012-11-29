@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CD54ECFF1667CC61002D997D /* JBSmartTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = CD54ECFE1667CC61002D997D /* JBSmartTextView.m */; };
 		CD7D5D37157CFE92007CE873 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD7D5D36157CFE92007CE873 /* Cocoa.framework */; };
 		CD7D5D41157CFE92007CE873 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CD7D5D3F157CFE92007CE873 /* InfoPlist.strings */; };
 		CD7D5D43157CFE92007CE873 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7D5D42157CFE92007CE873 /* main.m */; };
@@ -17,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CD54ECFD1667CC61002D997D /* JBSmartTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JBSmartTextView.h; sourceTree = "<group>"; };
+		CD54ECFE1667CC61002D997D /* JBSmartTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBSmartTextView.m; sourceTree = "<group>"; };
 		CD7D5D32157CFE92007CE873 /* TextEditing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TextEditing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD7D5D36157CFE92007CE873 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		CD7D5D39157CFE92007CE873 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -90,6 +93,8 @@
 				CD7D5D53157D00DD007CE873 /* JBTextEditorProcessor.h */,
 				CD7D5D54157D00DD007CE873 /* JBTextEditorProcessor.m */,
 				CD7D5D4B157CFE92007CE873 /* MainMenu.xib */,
+				CD54ECFD1667CC61002D997D /* JBSmartTextView.h */,
+				CD54ECFE1667CC61002D997D /* JBSmartTextView.m */,
 				CD7D5D3D157CFE92007CE873 /* Supporting Files */,
 			);
 			path = TextEditing;
@@ -175,6 +180,7 @@
 				CD7D5D43157CFE92007CE873 /* main.m in Sources */,
 				CD7D5D4A157CFE92007CE873 /* JBAppDelegate.m in Sources */,
 				CD7D5D55157D00DD007CE873 /* JBTextEditorProcessor.m in Sources */,
+				CD54ECFF1667CC61002D997D /* JBSmartTextView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,6 +302,7 @@
 				CD7D5D52157CFE92007CE873 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
